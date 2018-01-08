@@ -1,4 +1,14 @@
-﻿#region House Keeping
+﻿#region functions
+
+function web-getfile{
+    param([string]$gPath, [string]$dPath)
+    $client = new-object System.Net.WebClient
+    $client.DownloadFile("$gPath","$dPath")
+    }
+
+#endregion
+
+#region House Keeping
     #Update Timezone
         #Add logic for selectable TZ, must be FQ TZ name
             C:\windows\system32\tzutil.exe /s "Eastern Standard Time"
