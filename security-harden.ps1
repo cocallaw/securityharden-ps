@@ -14,7 +14,7 @@
 
     #Disable UAC | Restart Required 
         $UACKey = "HKLM:Software\Microsoft\Windows\CurrentVersion\policies\system"
-        New-ItemProperty -Path $UACKey -Name "EnableLUA" -PropertyType DWord -Value 0 -Force
+        New-ItemProperty -Path $UACKey -Name "EnableLUA" -PropertyType DWord -Value "00000000" -Force
 
 #endregion 
 
