@@ -1,31 +1,41 @@
-﻿#region functions
-
-function web-getfile{
-    param([string]$gPath, [string]$dPath)
-    $client = new-object System.Net.WebClient
-    $client.DownloadFile("$gPath","$dPath")
-    }
-
+﻿#region parameters
+    param (
+        [string] $timezone,
+        [switch] $fwon,
+        [switch] $IEESCon
+        )
 #endregion
 
 #region House Keeping
     #Update Timezone
-        #Add logic for selectable TZ, must be FQ TZ name
-            C:\windows\system32\tzutil.exe /s "Eastern Standard Time"
+        if($PSBoundParameters.ContainsKey(‘timezone’)){
+            C:\windows\system32\tzutil.exe /s $timezone
+        }
+        else{
+            C:\windows\system32\tzutil.exe /s "Coordinated Universal Time"
+        }
 
     #Disable Windows Firewall 
-        Set-NetFirewallProfile -Profile Public,Private -Enabled False
+        if($PSBoundParameters.ContainsKey(‘fwon’)){
+            Set-NetFirewallProfile -Profile Public,Private -Enabled True
+        }
+        else{
+            Set-NetFirewallProfile -Profile Public,Private -Enabled False
+        }
 
     #Disable IE Enhanced Security 
-        $AdminKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A7-37EF-4b3f-8CFC-4F3A74704073}"
-        $UserKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A8-37EF-4b3f-8CFC-4F3A74704073}"
-        Set-ItemProperty -Path $AdminKey -Name "IsInstalled" -Value 0
-        Set-ItemProperty -Path $UserKey -Name "IsInstalled" -Value 0
-
-    #Disable UAC | Restart Required 
-        $UACKey = "HKLM:Software\Microsoft\Windows\CurrentVersion\policies\system"
-        New-ItemProperty -Path $UACKey -Name "EnableLUA" -PropertyType DWord -Value "00000000" -Force
-
+        if($PSBoundParameters.Contains('IEESCon')){
+            $AdminKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A7-37EF-4b3f-8CFC-4F3A74704073}"
+            $UserKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A8-37EF-4b3f-8CFC-4F3A74704073}"
+            Set-ItemProperty -Path $AdminKey -Name "IsInstalled" -Value 1
+            Set-ItemProperty -Path $UserKey -Name "IsInstalled" -Value 1
+        }
+        else{
+            $AdminKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A7-37EF-4b3f-8CFC-4F3A74704073}"
+            $UserKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A8-37EF-4b3f-8CFC-4F3A74704073}"
+            Set-ItemProperty -Path $AdminKey -Name "IsInstalled" -Value 0
+            Set-ItemProperty -Path $UserKey -Name "IsInstalled" -Value 0
+        }
 #endregion 
 
 
