@@ -1,4 +1,7 @@
-﻿#region parameters
+﻿function Sec-Test{
+$ErrorActionPreference = "silentlycontinue"
+
+#region parameters
     param (
         [string] $timezone,
         [switch] $fwon,
@@ -8,23 +11,23 @@
 
 #region House Keeping
     #Update Timezone
-        if($PSBoundParameters.ContainsKey(‘timezone’)){
-            C:\windows\system32\tzutil.exe /s $timezone
+        if(!$timezone){
+            C:\windows\system32\tzutil.exe /s "UTC"
         }
         else{
-            C:\windows\system32\tzutil.exe /s "Coordinated Universal Time"
+            C:\windows\system32\tzutil.exe /s $timezone
         }
 
     #Disable Windows Firewall 
-        if($PSBoundParameters.ContainsKey(‘fwon’)){
+        if($fwon.IsPresent){
             Set-NetFirewallProfile -Profile Public,Private -Enabled True
         }
-        else{
+        else{            
             Set-NetFirewallProfile -Profile Public,Private -Enabled False
         }
 
     #Disable IE Enhanced Security 
-        if($PSBoundParameters.Contains('IEESCon')){
+        if($IEESCon.IsPresent){
             $AdminKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A7-37EF-4b3f-8CFC-4F3A74704073}"
             $UserKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A8-37EF-4b3f-8CFC-4F3A74704073}"
             Set-ItemProperty -Path $AdminKey -Name "IsInstalled" -Value 1
@@ -72,3 +75,4 @@
                                }
 
 #endregion
+}
