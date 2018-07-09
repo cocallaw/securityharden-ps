@@ -39,6 +39,10 @@ $ErrorActionPreference = "silentlycontinue"
             Set-ItemProperty -Path $AdminKey -Name "IsInstalled" -Value 0
             Set-ItemProperty -Path $UserKey -Name "IsInstalled" -Value 0
         }
+        
+   #Start Windows Update Check
+        $AutoUpdate = New-Object -ComObject "Microsoft.Update.AutoUpdate"
+        $AutoUpdate.DetectNow()
 #endregion 
 
 
