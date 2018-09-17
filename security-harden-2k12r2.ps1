@@ -110,11 +110,7 @@
 
 #Cipher Keys 
 
-        $ciphers = "System\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\DES 56/56",
-                   "System\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC2 128/128",
-                   "System\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC2 40/128",
-                   "System\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC2 56/128",
-                   "System\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 128/128",
+        $ciphers = "System\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 128/128",
                    "System\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 40/128",
                    "System\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 56/128",
                    "System\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4 64/128",
