@@ -123,4 +123,21 @@
                         Set-ItemProperty -path "Registry::$key" -Name "Enabled" -Type "DWord" -Value "00000000"
                                }
 
+#SMB Signing
+        $key =  "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\LanmanWorkStation\Parameters",                
+                "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\LanmanServer\Parameters"
+
+        foreach($k in $key){
+                    If  ( -Not ( Test-Path "Registry::$k")){New-Item -Path "Registry::$k" -ItemType RegistryKey -Force}
+                    Set-ItemProperty -path "Registry::$k" -Name "RequireSecuritySignature" -Type "DWord" -Value "1"
+                }
+
+
+        $key =  "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\LanmanWorkStation\Parameters",
+                "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\LanmanServer\Parameters"                  
+
+        foreach($k in $key){
+                    If  ( -Not ( Test-Path "Registry::$k")){New-Item -Path "Registry::$k" -ItemType RegistryKey -Force}
+                    Set-ItemProperty -path "Registry::$k" -Name "EnableSecuritySignature" -Type "DWord" -Value "1"
+                }
 #endregion
