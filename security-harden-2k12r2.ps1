@@ -63,6 +63,14 @@
                     Set-ItemProperty -path "Registry::$k" -Name "EventLogging" -Type "DWord" -Value "00000001"
                 }
 
+#KeyExchangeAlgorithms 
+        $key =  "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\KeyExchangeAlgorithms\Diffie-Hellman"
+
+        foreach($k in $key){
+                    If  ( -Not ( Test-Path "Registry::$k")){New-Item -Path "Registry::$k" -ItemType RegistryKey -Force}
+                    Set-ItemProperty -path "Registry::$k" -Name "ServerMinKeyBitLength" -Type "DWord" -Value "00000800"
+                }   
+
 #Multi-Protocol Unified Hello 
         $key = "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\Multi-Protocol Unified Hello\Client",
                "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\Multi-Protocol Unified Hello\Server"

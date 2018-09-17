@@ -82,8 +82,15 @@
                 }
 
 #KeyExchangeAlgorithms 
-        $key =  "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\KeyExchangeAlgorithms\Diffie-Hellman",
-                "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\KeyExchangeAlgorithms\PKCS"
+        $key =  "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\KeyExchangeAlgorithms\Diffie-Hellman"
+
+        foreach($k in $key){
+                    If  ( -Not ( Test-Path "Registry::$k")){New-Item -Path "Registry::$k" -ItemType RegistryKey -Force}
+                    Set-ItemProperty -path "Registry::$k" -Name "Enabled" -Type "DWord" -Value "00000000"
+                    Set-ItemProperty -path "Registry::$k" -Name "ServerMinKeyBitLength" -Type "DWord" -Value "00000800"
+                }                
+
+        $key =  "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\KeyExchangeAlgorithms\PKCS"
 
         foreach($k in $key){
                     If  ( -Not ( Test-Path "Registry::$k")){New-Item -Path "Registry::$k" -ItemType RegistryKey -Force}
