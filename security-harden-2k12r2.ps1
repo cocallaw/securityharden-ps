@@ -73,7 +73,7 @@
                     Set-ItemProperty -path "Registry::$k" -Name "DisabledByDefault" -Type "DWord" -Value "00000001"
                 }
 
-#Multi-Protocol Unified Hello 
+#PCT
         $key = "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\PCT 1.0\Client",
                "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\PCT 1.0\Server"
 
