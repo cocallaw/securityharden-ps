@@ -54,6 +54,14 @@
                     If  ( -Not ( Test-Path "Registry::$k")){New-Item -Path "Registry::$k" -ItemType RegistryKey -Force}
                 }
 
+#SCHANNEL Logging 
+        $key = "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL"
+
+        foreach($k in $key){
+                    If  ( -Not ( Test-Path "Registry::$k")){New-Item -Path "Registry::$k" -ItemType RegistryKey -Force}
+                    Set-ItemProperty -path "Registry::$k" -Name "EventLogging" -Type "DWord" -Value "00000001"
+                }
+
 #Hashes 
         $key =  "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Hashes\MD5",
                 "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Hashes\SHA",
