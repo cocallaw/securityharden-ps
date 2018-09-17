@@ -1,5 +1,4 @@
-﻿function Sec-Test{
-$ErrorActionPreference = "silentlycontinue"
+﻿$ErrorActionPreference = "silentlycontinue"
 
 #region parameters
     param (
@@ -79,4 +78,3 @@ $ErrorActionPreference = "silentlycontinue"
                                }
 
 #endregion
-}
