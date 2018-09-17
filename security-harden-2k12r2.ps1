@@ -122,9 +122,9 @@
 
 
         foreach($c in $ciphers){
-            $keys = "HKey_Local_Machine\" + $c
-                If  ( -Not ( Test-Path "Registry::$Key")){([Microsoft.Win32.RegistryKey]::OpenRemoteBaseKey([Microsoft.Win32.RegistryHive]::LocalMachine, $env:COMPUTERNAME)).CreateSubKey($c)}
-                        Set-ItemProperty -path "Registry::$Key" -Name "Enabled" -Type "DWord" -Value "0"
+            $key = "HKey_Local_Machine\" + $c
+                If  ( -Not ( Test-Path "Registry::$key")){([Microsoft.Win32.RegistryKey]::OpenRemoteBaseKey([Microsoft.Win32.RegistryHive]::LocalMachine, $env:COMPUTERNAME)).CreateSubKey($c)}
+                        Set-ItemProperty -path "Registry::$key" -Name "Enabled" -Type "DWord" -Value "00000000"
                                }
 
 #endregion
