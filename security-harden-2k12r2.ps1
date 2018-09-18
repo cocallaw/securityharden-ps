@@ -1,6 +1,4 @@
-﻿$ErrorActionPreference = "silentlycontinue"
-
-#region parameters
+﻿#region parameters
     param (
         [string] $timezone,
         [switch] $fwon,
