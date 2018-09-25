@@ -65,7 +65,7 @@ $key =  "HKey_Local_Machine\System\CurrentControlSet\Control\SecurityProviders\S
 
 foreach($k in $key){
     If  ( -Not ( Test-Path "Registry::$k")){New-Item -Path "Registry::$k" -ItemType RegistryKey -Force}
-    Set-ItemProperty -path "Registry::$k" -Name "Enabled" -Type "DWord" -Value "ffffffff"
+    Set-ItemProperty -path "Registry::$k" -Name "Enabled" -Type "DWord" -Value "0xffffffff"
     Set-ItemProperty -path "Registry::$k" -Name "DisabledByDefault" -Type "DWord" -Value "00000000"
 }
 
