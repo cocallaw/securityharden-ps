@@ -59,7 +59,7 @@ $key =  "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\S
 
 foreach($k in $key){
             If  ( -Not ( Test-Path "Registry::$k")){New-Item -Path "Registry::$k" -ItemType RegistryKey -Force}
-            Set-ItemProperty -path "Registry::$k" -Name "Enabled" -Type "DWord" -Value "00000001"
+            Set-ItemProperty -path "Registry::$k" -Name "Enabled" -Type "DWord" -Value "0xffffffff"
         }
 
 #Multi-Protocol Unified Hello 
